@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Welcome"; }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center py-5 bg-light rounded mb-4">
+    <h1 class="display-4">Welcome to Sweet Crumbs Bakery</h1>
+    <p class="lead">Freshly baked croissants, cookies, muffins, and cakes, made every day.</p>
+    <hr class="my-4" />
+    <p>Browse our pastries, add your favorites to the cart, and see your total.</p>
+    <a class="btn btn-primary btn-lg" asp-controller="Products" asp-action="Index">View Products</a>
+    <a class="btn btn-outline-secondary btn-lg" asp-controller="Cart" asp-action="Index">Go to Cart</a>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-3 text-center">
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Browse</h5>
+                <p class="card-text text-muted">See all our pastries with their descriptions and prices.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Add to Cart</h5>
+                <p class="card-text text-muted">Click Add to Cart on any pastry you like.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Check Your Total</h5>
+                <p class="card-text text-muted">Change quantities or remove items, and see the total.</p>
+            </div>
+        </div>
+    </div>
 </div>
