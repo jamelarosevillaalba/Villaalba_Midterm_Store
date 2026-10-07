@@ -1,0 +1,33 @@
+@model List<Villaalba_Midterm_Store.Models.Product>
+@{ ViewData["Title"] = "Products"; }
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Products</h2>
+    <a class="btn btn-success" asp-action="Create">+ Add Product</a>
+</div>
+<table class="table table-striped align-middle">
+    <thead class="table-dark">
+        <tr><th>Name</th><th>Description</th><th>Category</th><th>Price</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.Description</td>
+            <td>@p.Category</td>
+            <td>@p.Price.ToString("N2")</td>
+            <td class="d-flex gap-1">
+                <form asp-controller="Cart" asp-action="Add" method="post">
+                    <input type="hidden" name="productId" value="@p.Id" />
+                    <button class="btn btn-primary btn-sm">Add to Cart</button>
+                </form>
+                <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@p.Id">Edit</a>
+                <form asp-action="Delete" method="post" onsubmit="return confirm('Delete this product?');">
+                    <input type="hidden" name="id" value="@p.Id" />
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

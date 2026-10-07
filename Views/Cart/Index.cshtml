@@ -1,0 +1,38 @@
+@model List<Villaalba_Midterm_Store.Models.CartItem>
+@{ ViewData["Title"] = "Cart"; }
+<h2>Your Cart</h2>
+<table class="table table-striped align-middle">
+    <thead class="table-dark">
+        <tr><th>Product Name</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th></th></tr>
+    </thead>
+    <tbody>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.ProductName</td>
+            <td>@i.Price.ToString("N2")</td>
+            <td>
+                <form asp-action="UpdateQuantity" method="post" class="d-flex gap-1">
+                    <input type="hidden" name="id" value="@i.Id" />
+                    <input type="number" name="quantity" value="@i.Quantity" min="1" class="form-control form-control-sm" style="width:80px" />
+                    <button class="btn btn-outline-primary btn-sm">Update</button>
+                </form>
+            </td>
+            <td>@((i.Price * i.Quantity).ToString("N2"))</td>
+            <td>
+                <form asp-action="Remove" method="post">
+                    <input type="hidden" name="id" value="@i.Id" />
+                    <button class="btn btn-danger btn-sm">Remove</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr class="fw-bold">
+            <td colspan="3" class="text-end">Total:</td>
+            <td colspan="2">@Model.Sum(i => i.Price * i.Quantity).ToString("N2")</td>
+        </tr>
+    </tfoot>
+</table>
+@if (!Model.Any()) { <p class="text-muted">Your cart is empty.</p> }
