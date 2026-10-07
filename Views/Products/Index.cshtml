@@ -4,19 +4,19 @@
     <h2>Products</h2>
     <a class="btn btn-success" asp-action="Create">+ Add Product</a>
 </div>
-<table class="table table-striped align-middle">
-    <thead class="table-dark">
-        <tr><th>Name</th><th>Description</th><th>Category</th><th>Price</th><th>Actions</th></tr>
-    </thead>
-    <tbody>
-    @foreach (var p in Model)
-    {
-        <tr>
-            <td>@p.Name</td>
-            <td>@p.Description</td>
-            <td>@p.Category</td>
-            <td>@p.Price.ToString("N2")</td>
-            <td class="d-flex gap-1">
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+@foreach (var p in Model)
+{
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">@p.Category</span>
+                <h5 class="card-title">@p.Name</h5>
+                <p class="card-text text-muted">@p.Description</p>
+                <p class="fs-5 fw-bold mb-0">@p.Price.ToString("N2")</p>
+            </div>
+            <div class="card-footer bg-white d-flex gap-1">
                 <form asp-controller="Cart" asp-action="Add" method="post">
                     <input type="hidden" name="productId" value="@p.Id" />
                     <button class="btn btn-primary btn-sm">Add to Cart</button>
@@ -26,8 +26,10 @@
                     <input type="hidden" name="id" value="@p.Id" />
                     <button class="btn btn-danger btn-sm">Delete</button>
                 </form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+@if (!Model.Any()) { <p class="text-muted">No products yet. Click "+ Add Product" to add one.</p> }
